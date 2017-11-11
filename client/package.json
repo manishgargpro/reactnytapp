@@ -9,6 +9,7 @@
     "react-dom": "^16.1.0",
     "react-scripts": "1.0.17"
   },
+  "homepage": "https://nytreactsaver.herokuapp.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
