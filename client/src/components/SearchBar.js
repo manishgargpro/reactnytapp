@@ -12,7 +12,7 @@ class SearchBar extends Component {
   search = query => {
     API.search(query)
       .then(res => {
-        this.setState({results: res.data.response.docs})
+        this.setState({ results: res.data.response.docs })
         console.log(this.state.results);
       })
       .catch(err => console.log(err));
@@ -28,19 +28,16 @@ class SearchBar extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.q) {
-      if (this.state.begin && this.state.end) {
-        const searchQuery = {
-          params: {
-            q: this.state.q,
-            begin_date: this.state.begin,
-            end_date: this.state.end
-          }
-        }
-        this.search(searchQuery);
-      } else {
-        const searchQuery = "?q=" + this.state.q
-        this.search(searchQuery);
+      const searchQuery = {
+        q: this.state.q,
+        begin_date: this.state.begin,
+        end_date: this.state.end
       }
+      const formattedQuery = Object.keys(searchQuery).filter(key => searchQuery[key]).reduce((acc, curr) => {
+        acc[curr] = searchQuery[curr]
+        return acc;
+      }, {});
+      this.search({ params: formattedQuery });
     }
   };
 
